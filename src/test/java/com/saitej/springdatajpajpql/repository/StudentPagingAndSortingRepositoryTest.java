@@ -3,14 +3,14 @@ package com.saitej.springdatajpajpql.repository;
 import com.saitej.springdatajpajpql.entities.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class StudentPagingAndSortingRepositoryTest {
@@ -20,8 +20,10 @@ class StudentPagingAndSortingRepositoryTest {
 
     @Test
     void findAllStudents() {
-       // List<Student> students = pagingAndSortingRepository.findAllStudents(PageRequest.of(1, 5));
-        List<Student> students = pagingAndSortingRepository.findAllStudents(PageRequest.of(1, 5, Sort.by("firstName").ascending()));
+        List<Student> students = pagingAndSortingRepository.findAllStudents(PageRequest.of(1, 5));
+       // List<Student> students =
+                pagingAndSortingRepository
+                        .findAllStudents(PageRequest.of(1, 5, Sort.by("firstName").ascending()));//for sorting
          students.forEach(p-> System.out.println(p.getFirstName()));
         assertNotNull(students);
         assertEquals(5,students.stream().count());

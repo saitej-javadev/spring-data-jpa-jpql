@@ -9,11 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
-import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Slf4j
 @SpringBootTest
 class SpringDataJpaJpqlApplicationTests {
@@ -64,5 +63,17 @@ class SpringDataJpaJpqlApplicationTests {
     void deleteStudentsByFirstName() {
         studentRepository.deleteStudentsByFirstName("Bill");
         assertEquals(2,studentRepository.count());
+    }
+
+    @Test
+    void findAllStudentsNQ() {
+        List<Student> allStudentsNQ = studentRepository.findAllStudentsNQ();
+        System.out.println(allStudentsNQ);
+    }
+
+    @Test
+    void findAllStudentsLikeNQ() {
+        List<Student> studentsLikeNQ = studentRepository.findAllStudentsLikeNQ("S");
+        studentsLikeNQ.forEach(System.out::println);
     }
 }
